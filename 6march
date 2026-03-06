@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cout << "enter number of data points: ";
+    cin >> n;
+
+    vector<double> x(n), y(n);
+    double sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+
+    cout << "enter x and y values:\n";
+    for(int i = 0; i < n; i++) {
+        cin >> x[i] >> y[i];
+        sumX += x[i];
+        sumY += y[i];
+        sumXY += x[i] * y[i];
+        sumX2 += x[i] * x[i];
+    }
+
+    // calc slope (m) and intercept (c)
+    double m = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    double c = (sumY - m * sumX) / n;
+
+    cout << "\nregression equation: y = " << m << "x + " << c << endl;
+
+    // test prediction
+    double testX;
+    cout << "\nenter x to predict y: ";
+    cin >> testX;
+    cout << "predicted y: " << (m * testX) + c << endl;
+
+    return 0;
+}
